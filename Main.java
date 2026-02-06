@@ -1,19 +1,13 @@
-import iterator.BrowserHistory;
-import iterator.Iterator;
+import strategy.BlackAndWhiteFilter;
+import strategy.ImageStorage;
+import strategy.JPEGCompressor;
 
 public class Main {
     public static void main(String[] args) {
-        var browserHistory = new BrowserHistory();
-        browserHistory.push("https://url1.com");
-        browserHistory.push("https://url2.com");
-        browserHistory.push("https://url3.com");
+        var jpegCompressor = new JPEGCompressor();
+        var blackAndWhiteFilter = new BlackAndWhiteFilter();
+        var imageStorage = new ImageStorage(jpegCompressor, blackAndWhiteFilter);
 
-        Iterator<String> iterator = browserHistory.createIterator();
-
-        while (iterator.hasNext()) {
-            var url = iterator.current();
-            System.out.println("url: " + url);
-            iterator.next();
-        }
+        imageStorage.store("somefilename.jpeg");
     }
 }
